@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/ass1.dir/link.d "CMakeFiles/ass1.dir/Assignment-1.cpp.o" "CMakeFiles/ass1.dir/test-exes/Test.cpp.o" -o bin/ass1

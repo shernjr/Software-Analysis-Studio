@@ -6,11 +6,11 @@
             "type": "cppdbg",
             "request": "launch",
             // Please change to the executable of your current lab or assignment
-            "program": "${workspaceFolder}/Assignment-1/build/bin/ass1",
+            "program": "${workspaceFolder}/Assignment-1/bin/ass1",
             "args": ["${workspaceFolder}/Assignment-1/test-exes/test1.graph.txt"], // may input the test llvm bc file or other options and flags the program may use
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "C/C++: cpp build active file",
-            "MIMode": "gdb",
+            "MIMode": "lldb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
