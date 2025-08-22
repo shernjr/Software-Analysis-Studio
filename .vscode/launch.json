@@ -10,7 +10,7 @@
             "args": ["${workspaceFolder}/Assignment-1/test-exes/test1.graph.txt"], // may input the test llvm bc file or other options and flags the program may use
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "C/C++: cpp build active file",
-            "MIMode": "lldb",
+            "MIMode": "gdb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
