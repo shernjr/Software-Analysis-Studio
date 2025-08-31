@@ -80,4 +80,37 @@ void ICFGTraversal::reachability(const ICFGNode *src, const ICFGNode *dst)
 
      */
 
+     reachability(currNode, snk) {
+        auto pair = std::make_pair(currNode, callStack);
+        if (visited.find(pair) != visited.end()) {
+            return;
+        }
+        visited.insert(pair);
+        path.push_back(currNode->getId());
+
+        if (currNode == snk) {
+            collectICFGPath(path);
+        }
+
+        for (const auto &edge : currNode -> getOutEdges()) {
+            if (edge.isIntraCFGEdge()) {
+                reachability(edge.getDst(), snk);
+            } else if (edge.isCallCFGEdge()) {
+                callStack.push_back(edge.getSrc());
+                reachability(edge.getDst(), snk);
+                callStack.pop_back();
+            } else if (edge.isRetCFGEdge()) {
+                if (callStack != nullptr && callStack.back() == edge.getcallSite()) {
+                    callStack.pop_back();
+                    reachability(edge.getDst(), snk);
+                    callStack.push_back(edge.getcallSite());
+                }
+            } else if (callStack.empty()) {
+                reachability(edge.getDst(), snk);
+            }
+        } 
+        visited.erase(pair);
+        path.pop_back();
+     }
+
 }
