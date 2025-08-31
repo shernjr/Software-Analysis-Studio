@@ -112,5 +112,4 @@ void ICFGTraversal::reachability(const ICFGNode *src, const ICFGNode *dst)
         visited.erase(pair);
         path.pop_back();
      }
-
 }
