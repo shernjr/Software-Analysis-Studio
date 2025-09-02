@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/sern/Documents/GitHub/Software-Analysis-Studio/Assignment-1/Assignment-1.cpp" "CMakeFiles/ass1.dir/Assignment-1.cpp.o" "gcc" "CMakeFiles/ass1.dir/Assignment-1.cpp.o.d"
-  "/home/sern/Documents/GitHub/Software-Analysis-Studio/Assignment-1/test-exes/Test.cpp" "CMakeFiles/ass1.dir/test-exes/Test.cpp.o" "gcc" "CMakeFiles/ass1.dir/test-exes/Test.cpp.o.d"
-  "" "bin/ass1" "gcc" "CMakeFiles/ass1.dir/link.d"
+  "/home/SVF-tools/Software-Analysis-Studio/Assignment-1/12006300_41128_SaS_Assignment-1.cpp" "Assignment-1/CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.o" "gcc" "Assignment-1/CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.o.d"
+  "/home/SVF-tools/Software-Analysis-Studio/Assignment-1/Assignment-1.cpp" "Assignment-1/CMakeFiles/ass1.dir/Assignment-1.cpp.o" "gcc" "Assignment-1/CMakeFiles/ass1.dir/Assignment-1.cpp.o.d"
+  "/home/SVF-tools/Software-Analysis-Studio/Assignment-1/test-exes/Test.cpp" "Assignment-1/CMakeFiles/ass1.dir/test-exes/Test.cpp.o" "gcc" "Assignment-1/CMakeFiles/ass1.dir/test-exes/Test.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
