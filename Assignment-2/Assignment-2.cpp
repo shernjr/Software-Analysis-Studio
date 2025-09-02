@@ -36,7 +36,7 @@ using namespace std;
 /// Print the path in the format "START->1->2->4->5->END", where -> indicate an ICFGEdge connects two ICFGNode IDs
 
 void ICFGTraversal::collectICFGPath(std::vector<unsigned> &path){
-    std::string pathStr = "START ";
+    std::string pathStr = "START";
     for (size_t i = 0; i < path.size(); ++i) { 
         pathStr += "->" + std::to_string(path[i]); // double check
     }
@@ -80,8 +80,8 @@ void ICFGTraversal::reachability(const ICFGNode *src, const ICFGNode *dst)
 
      */
 
-     reachability(currNode, snk) {
-        auto pair = std::make_pair(currNode, callStack);
+     auto dfs = [&](const ICFGNode *currNode, const ICFGNode *snk, auto&& dfs_ref) -> void {
+        auto pair = std::make_pair(currNode, callstack);
         if (visited.find(pair) != visited.end()) {
             return;
         }
@@ -90,26 +90,35 @@ void ICFGTraversal::reachability(const ICFGNode *src, const ICFGNode *dst)
 
         if (currNode == snk) {
             collectICFGPath(path);
-        }
+        } else {
+            for (const auto &edge : currNode -> getOutEdges()) {
+                if (edge -> isIntraCFGEdge()) {
 
-        for (const auto &edge : currNode -> getOutEdges()) {
-            if (edge.isIntraCFGEdge()) {
-                reachability(edge.getDst(), snk);
-            } else if (edge.isCallCFGEdge()) {
-                callStack.push_back(edge.getSrc());
-                reachability(edge.getDst(), snk);
-                callStack.pop_back();
-            } else if (edge.isRetCFGEdge()) {
-                if (callStack != nullptr && callStack.back() == edge.getcallSite()) {
-                    callStack.pop_back();
-                    reachability(edge.getDst(), snk);
-                    callStack.push_back(edge.getcallSite());
+                    dfs_ref(edge -> getDst(), snk, dfs_ref);
+
+                } else if (edge -> isCallCFGEdge()) {
+
+                    callstack.push_back(edge -> getSrc());
+                    dfs_ref(edge -> getDst(), snk, dfs_ref);
+                    callstack.pop_back();
+
+                } else if (edge -> isRetCFGEdge()) {
+
+                    if (callstack.empty() && callstack.back() == edge -> getCallSite()) {
+                        callstack.pop_back();
+                        reachability(edge -> getDst(), snk, dfs_ref);
+                        callstack.push_back(edge -> getCallSite());
+                    }
+
+                } else if (callstack.empty()) {
+                    
+                    reachability(edge -> getDst(), snk);
+
                 }
-            } else if (callStack.empty()) {
-                reachability(edge.getDst(), snk);
-            }
-        } 
+            } 
+        }
         visited.erase(pair);
         path.pop_back();
-     }
+     };
+    dfs(src, dst, dfs);
 }
