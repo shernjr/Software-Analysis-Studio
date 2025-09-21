@@ -105,8 +105,40 @@ void ICFGTraversal::reachability(const ICFGNode* src, const ICFGNode* dst) {
 /// line 1 for sources  "{ api1 api2 api3 }"
 /// line 2 for sinks    "{ api1 api2 api3 }"
 void ICFGTraversal::readSrcSnkFromFile(const string& filename) {
-	
+	ifstream file(filename);
+    if (!file.is_open()) {
+        cerr << "Error opening file: " << filename << endl;
+        return;
+    }
 
+    string line;
+    // Read sources
+    if (getline(file, line)) {
+        line.erase(remove_if(line.begin(), line.end(), ::isspace), line.end());
+        if (line.front() == '{' && line.back() == '}') {
+            line = line.substr(1, line.size() - 2);
+            stringstream ss(line);
+            string api;
+            while (ss >> api) {
+                checker_source_api.insert(api);
+            }
+        }
+    }
+
+    // Read sinks
+    if (getline(file, line)) {
+        line.erase(remove_if(line.begin(), line.end(), ::isspace), line.end());
+        if (line.front() == '{' && line.back() == '}') {
+            line = line.substr(1, line.size() - 2);
+            stringstream ss(line);
+            string api;
+            while (ss >> api) {
+                checker_sink_api.insert(api);
+            }
+        }
+    }
+
+    file.close();
 }
 
 // TODO: Implement your Andersen's Algorithm here
