@@ -50,7 +50,6 @@ void ICFGTraversal::collectICFGPath(std::vector<unsigned> &path){
 
 void ICFGTraversal::reachability(const ICFGNode *src, const ICFGNode *dst)
 {
-<<<<<<< HEAD
     using CallStack = std::vector<const ICFGNode*>;
     using VisitPair = std::pair<const ICFGNode*, CallStack>;
     std::set<VisitPair> visited;
@@ -94,80 +93,6 @@ void ICFGTraversal::reachability(const ICFGNode *src, const ICFGNode *dst)
     };
 
     dfs(src);
-=======
-    /**
-     * reachability(curNode, snk)
-        pair = ⟨curNode, callstack⟩;
-        if pair ∈ visited then
-        return;
-
-        visited.insert(pair);
-        path.push back(curNode);
-
-        if src == snk then
-            collectICFGPath(path);
-        foreach edge ∈ curNode.getOutEdges() do
-            if edge.isIntraCFGEdge() then
-                reachability(edge.dst, snk);
-            else if edge.isCallCFGEdge() then
-                callstack.push back(edge.src);
-                reachability(edge.dst, snk);
-                callstack.pop back();
-            else if edge.isRetCFGEdge() then
-                if callstack ̸= ∅ && callstack.back() == edge.getCallSite() then
-                    callstack.pop back();
-                    reachability(edge.dst, snk);
-                    callstack.push back(edge.getCallSite());
-            else if callstack == ∅ then
-                reachability(edge.dst, snk);
-        
-        visited.erase(pair);
-        path.pop back();
-
-     */
-
-     auto dfs = [&](const ICFGNode *currNode, const ICFGNode *snk, auto&& dfs_ref) -> void {
-        auto pair = std::make_pair(currNode, callstack);
-        if (visited.find(pair) != visited.end()) {
-            return;
-        }
-        visited.insert(pair);
-        path.push_back(currNode->getId());
-
-        if (currNode == snk) {
-            collectICFGPath(path);
-        } else {
-            for (const auto &edge : currNode -> getOutEdges()) {
-                if (edge -> isIntraCFGEdge()) {
-
-                    dfs_ref(edge -> getDst(), snk, dfs_ref);
-
-                } else if (edge -> isCallCFGEdge()) {
-
-                    callstack.push_back(edge -> getSrc());
-                    dfs_ref(edge -> getDst(), snk, dfs_ref);
-                    callstack.pop_back();
-
-                } else if (edge -> isRetCFGEdge()) {
-
-                    if (callstack.empty() && callstack.back() == edge -> getCallSite()) {
-                        callstack.pop_back();
-                        reachability(edge -> getDst(), snk, dfs_ref);
-                        callstack.push_back(edge -> getCallSite());
-                    }
-
-                } else if (callstack.empty()) {
-                    
-                    reachability(edge -> getDst(), snk);
-
-                }
-            } 
-        }
-        visited.erase(pair);
-        path.pop_back();
-     };
-    dfs(src, dst, dfs);
->>>>>>> 941537f1578dea4c80f3b223c355a3cced4de612
 }
 
 /**

@@ -44,8 +44,18 @@ using namespace std;
 /// You will need to collect each path from src to snk and then add the path to the `paths` set.
 /// Add each path (a sequence of node IDs) as a string into std::set<std::string> paths
 /// in the format "START->1->2->4->5->END", where -> indicate an ICFGEdge connects two ICFGNode IDs
+static void collectICFGPath(std::set<std::string>& paths, const std::vector<unsigned>& path) {
+    std::string pathStr = "START";
+    for (size_t i = 0; i < path.size(); ++i) {
+        pathStr += "->" + std::to_string(path[i]);
+    }
+    pathStr += "->END";
+    std::cout << pathStr << std::endl;
+    paths.insert(pathStr);
+}
+
 void ICFGTraversal::reachability(const ICFGNode* src, const ICFGNode* dst) {
-	    using CallStack = std::vector<const ICFGNode*>;
+    using CallStack = std::vector<const ICFGNode*>;
     using VisitPair = std::pair<const ICFGNode*, CallStack>;
     std::set<VisitPair> visited;
     std::vector<unsigned> path;
@@ -58,7 +68,7 @@ void ICFGTraversal::reachability(const ICFGNode* src, const ICFGNode* dst) {
         path.push_back(currNode->getId());
 
         if (currNode == dst) {
-            collectICFGPath(path);
+            collectICFGPath(paths, path);
         } else {
             for (const auto& edge : currNode->getOutEdges()) {
                 if (edge->isIntraCFGEdge()) {
