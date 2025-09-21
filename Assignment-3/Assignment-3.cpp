@@ -150,72 +150,49 @@ void ICFGTraversal::readSrcSnkFromFile(const string& filename) {
 /// q <--GEP, fld-- p    =>  for each o ∈ pts(p) : pts(q) = pts(q) ∪ {o.fld}
 /// pts(q) denotes the points-to set of q
 void AndersenPTA::solveWorklist() {
-    std::vector<NodeID> localWorklist;
-
-    while (!worklist.empty()) {
+    while (!isWorklistEmpty()) {
         NodeID p = popFromWorklist();
-        localWorklist.push_back(p);
-    }
+        ConstraintNode* pNode = consCG->getConstraintNode(p);
+        const PointsTo& pPts = getPts(p);
 
-    for (NodeID p : localWorklist) {
-        ConstraintNode* node = consCG->getConstraintNode(p);
-
-        for (auto edge :  node ->getOutEdges()) {
-            NodeID src = edge->getSrcID();
-            NodeID dst = edge->getDstID();
-            switch (edge -> getEdgeKind()) {
-                case ConstraintEdge::Addr: {
-                    // Addr: pts(p) = pts(p) ∪ {o}
-                    if (addPts(src, dst)) {
-                        pushIntoWorklist(src);
-                    }
-                    break;
-                }
+            for (ConstraintEdge* edge : pNode->getOutEdges()) {
+            NodeID q = edge->getDstID();
+            switch (edge->getEdgeKind()) {
                 case ConstraintEdge::Copy: {
-                    // Copy: pts(q) = pts(q) ∪ pts(p)
-                    bool changed = false;
-                    for (NodeID o : getPts(src)) {
-                        if (addPts(dst, o)) changed = true;
-                    }
-                    if (changed) {
-                        pushIntoWorklist(dst);
+                    // Rule: q <--COPY-- p
+                    if (unionPts(q, pPts)) {
+                        pushIntoWorklist(q);
                     }
                     break;
                 }
                 case ConstraintEdge::Load: {
-                    // Load: for each o ∈ pts(p) : q <--COPY-- o
-                    for (NodeID o : getPts(src)) {
-                        if (addCopyEdge(o, dst)) {
-                            pushIntoWorklist(dst);
+                    // Rule: q <--LOAD-- p
+                    for (NodeID o : pPts) {
+                        if (addCopyEdge(o, q)) {
+                            if (unionPts(q, getPts(o))) {
+                                pushIntoWorklist(q);
+                            }
                         }
                     }
                     break;
                 }
                 case ConstraintEdge::Store: {
-                    // Store: for each o ∈ pts(q) : o <--COPY-- p
-                    for (NodeID o : getPts(dst)) {
-                        if (addCopyEdge(src, o)) {
-                            pushIntoWorklist(o);
+                    // Rule: q <--STORE-- p
+                    for (NodeID o : pPts) {
+                        if (addCopyEdge(o, p)) {
+                            if (unionPts(o, pPts)) {
+                                pushIntoWorklist(o);
+                            }
                         }
                     }
                     break;
                 }
-                case ConstraintEdge::NormalGep:
-                case ConstraintEdge::VariantGep: {
-                    // Gep: for each o ∈ pts(p) : pts(q) = pts(q) ∪ {o.fld}
-                    APOffset fld = edge -> getEdgeID();
-                    bool changed = false;
-                    for (NodeID o : getPts(src)) {
-                        NodeID fldObj = getGepObjVar(o, fld);
-                        if (addPts(dst, fldObj)) changed = true;
-                    }
-                    if (changed) {
-                        pushIntoWorklist(dst);
-                    }
+                default:
                     break;
-                }
+
             }
         }
+
     }
 }
 
