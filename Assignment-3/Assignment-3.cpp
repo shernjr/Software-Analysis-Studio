@@ -150,15 +150,107 @@ void ICFGTraversal::readSrcSnkFromFile(const string& filename) {
 /// q <--GEP, fld-- p    =>  for each o ∈ pts(p) : pts(q) = pts(q) ∪ {o.fld}
 /// pts(q) denotes the points-to set of q
 void AndersenPTA::solveWorklist() {
-	
+    std::vector<NodeID> localWorklist;
+
+    while (!worklist.empty()) {
+        NodeID p = popFromWorklist();
+        localWorklist.push_back(p);
+    }
+
+    for (NodeID p : localWorklist) {
+        ConstraintNode* node = consCG->getConstraintNode(p);
+
+        for (auto edge :  node ->getOutEdges()) {
+            NodeID src = edge->getSrcID();
+            NodeID dst = edge->getDstID();
+            switch (edge -> getEdgeKind()) {
+                case ConstraintEdge::Addr: {
+                    // Addr: pts(p) = pts(p) ∪ {o}
+                    if (addPts(src, dst)) {
+                        pushIntoWorklist(src);
+                    }
+                    break;
+                }
+                case ConstraintEdge::Copy: {
+                    // Copy: pts(q) = pts(q) ∪ pts(p)
+                    bool changed = false;
+                    for (NodeID o : getPts(src)) {
+                        if (addPts(dst, o)) changed = true;
+                    }
+                    if (changed) {
+                        pushIntoWorklist(dst);
+                    }
+                    break;
+                }
+                case ConstraintEdge::Load: {
+                    // Load: for each o ∈ pts(p) : q <--COPY-- o
+                    for (NodeID o : getPts(src)) {
+                        if (addCopyEdge(o, dst)) {
+                            pushIntoWorklist(dst);
+                        }
+                    }
+                    break;
+                }
+                case ConstraintEdge::Store: {
+                    // Store: for each o ∈ pts(q) : o <--COPY-- p
+                    for (NodeID o : getPts(dst)) {
+                        if (addCopyEdge(src, o)) {
+                            pushIntoWorklist(o);
+                        }
+                    }
+                    break;
+                }
+                case ConstraintEdge::NormalGep:
+                case ConstraintEdge::VariantGep: {
+                    // Gep: for each o ∈ pts(p) : pts(q) = pts(q) ∪ {o.fld}
+                    APOffset fld = edge -> getEdgeID();
+                    bool changed = false;
+                    for (NodeID o : getPts(src)) {
+                        NodeID fldObj = getGepObjVar(o, fld);
+                        if (addPts(dst, fldObj)) changed = true;
+                    }
+                    if (changed) {
+                        pushIntoWorklist(dst);
+                    }
+                    break;
+                }
+            }
+        }
+    }
 }
+
+/*g = < V,E > !" Constraint Graph
+V: a set of nodes in graph
+E: a set of edges in graph
+WorkList: a vector of nodes
+foreach do
+    pts(p) = {o}
+    pushIntoWorklist(p)
+while WorkList ≠ ∅ do
+    p !% popFromWorklist()
+    foreach o ∈ pts(p) do
+        foreach do
+        if ∉ E then
+            E !% E ∪ { }
+            pushIntoWorklist(q)
+        foreach do
+            if ∉ E then
+            E !% E ∪ { }
+            pushIntoWorklist(o)
+    foreach do
+        pts(x) !% pts(x) ∪ pts(p)
+        if pts(x) changed then
+        pushIntoWorklist(x) */
+
 
 /// TODO: Checking aliases of the two variables at source and sink. For example:
 /// src instruction:  actualRet = source();
 /// snk instruction:  sink(actualParm,...);
 /// return true if actualRet is aliased with any parameter at the snk node (e.g., via ander->alias(..,..))
 bool ICFGTraversal::aliasCheck(const CallICFGNode* src, const CallICFGNode* snk) {
-	return false;
+	
+    
+    return false;
 }
 
 // Start taint checking.
