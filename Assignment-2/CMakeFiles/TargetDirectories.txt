@@ -1,0 +1,3 @@
+/home/SVF-tools/Software-Analysis-Studio/Assignment-2/CMakeFiles/ass2.dir
+/home/SVF-tools/Software-Analysis-Studio/Assignment-2/CMakeFiles/edit_cache.dir
+/home/SVF-tools/Software-Analysis-Studio/Assignment-2/CMakeFiles/rebuild_cache.dir

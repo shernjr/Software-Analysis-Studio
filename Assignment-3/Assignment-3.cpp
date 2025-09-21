@@ -45,7 +45,49 @@ using namespace std;
 /// Add each path (a sequence of node IDs) as a string into std::set<std::string> paths
 /// in the format "START->1->2->4->5->END", where -> indicate an ICFGEdge connects two ICFGNode IDs
 void ICFGTraversal::reachability(const ICFGNode* src, const ICFGNode* dst) {
-	
+	    using CallStack = std::vector<const ICFGNode*>;
+    using VisitPair = std::pair<const ICFGNode*, CallStack>;
+    std::set<VisitPair> visited;
+    std::vector<unsigned> path;
+    CallStack callstack;
+
+    std::function<void(const ICFGNode*)> dfs = [&](const ICFGNode* currNode) {
+        VisitPair pair = {currNode, callstack};
+        if (visited.count(pair)) return;
+        visited.insert(pair);
+        path.push_back(currNode->getId());
+
+        if (currNode == dst) {
+            collectICFGPath(path);
+        } else {
+            for (const auto& edge : currNode->getOutEdges()) {
+                if (edge->isIntraCFGEdge()) {
+                    dfs(edge->getDstNode());
+                } else if (edge->isCallCFGEdge()) {
+                    callstack.push_back(currNode);
+                    dfs(edge->getDstNode());
+                    callstack.pop_back();
+                } else if (edge->isRetCFGEdge()) {
+                    if (SVFUtil::isa<RetICFGNode>(currNode)) {
+                        const ICFGNode* callsite = SVFUtil::cast<RetICFGNode>(currNode)->getCallICFGNode();
+                        if (!callstack.empty() && callstack.back() == callsite) {
+                            callstack.pop_back();
+                            dfs(edge->getDstNode());
+                            callstack.push_back(callsite);
+                            continue;
+                        }
+                    }
+                } if (callstack.empty()) {
+                    dfs(edge->getDstNode());
+                }
+                
+            }
+        }
+        visited.erase(pair);
+        path.pop_back();
+    };
+
+    dfs(src);
 }
 
 /// TODO: Implement your code to parse the two lines to identify sources and sinks from `SrcSnk.txt` for your
