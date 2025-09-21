@@ -6,5 +6,9 @@ CXX_DEFINES = -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__
 
 CXX_INCLUDES = -isystem /home/SVF-tools/SVF/llvm-16.0.0.obj/include -isystem /home/SVF-tools/SVF/Debug-build/include/../../svf/include -isystem /home/SVF-tools/SVF/Debug-build/include/../../svf-llvm/include -isystem /home/SVF-tools/SVF/Debug-build/include -isystem /home/SVF-tools/SVF/z3.obj/include
 
+<<<<<<< HEAD
 CXX_FLAGS = -fPIC -std=gnu++17 -O0 -fno-rtti -Wno-deprecated -Werror -g   -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -fno-exceptions
+=======
+CXX_FLAGS = -fPIC -std=gnu++17 -O3 -fno-rtti -Wno-deprecated -Werror -O3 -DNDEBUG   -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -fno-exceptions
+>>>>>>> 941537f1578dea4c80f3b223c355a3cced4de612
 

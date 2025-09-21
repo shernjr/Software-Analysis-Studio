@@ -1,0 +1,3 @@
+/home/sern/Documents/GitHub/Software-Analysis-Studio/Assignment-1/CMakeFiles/ass1.dir
+/home/sern/Documents/GitHub/Software-Analysis-Studio/Assignment-1/CMakeFiles/edit_cache.dir
+/home/sern/Documents/GitHub/Software-Analysis-Studio/Assignment-1/CMakeFiles/rebuild_cache.dir

@@ -8,6 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+<<<<<<< HEAD
+=======
+  "/home/SVF-tools/Software-Analysis-Studio/Assignment-1/12006300_41128_SaS_Assignment-1.cpp" "Assignment-1/CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.o" "gcc" "Assignment-1/CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.o.d"
+>>>>>>> 941537f1578dea4c80f3b223c355a3cced4de612
   "/home/SVF-tools/Software-Analysis-Studio/Assignment-1/Assignment-1.cpp" "Assignment-1/CMakeFiles/ass1.dir/Assignment-1.cpp.o" "gcc" "Assignment-1/CMakeFiles/ass1.dir/Assignment-1.cpp.o.d"
   "/home/SVF-tools/Software-Analysis-Studio/Assignment-1/test-exes/Test.cpp" "Assignment-1/CMakeFiles/ass1.dir/test-exes/Test.cpp.o" "gcc" "Assignment-1/CMakeFiles/ass1.dir/test-exes/Test.cpp.o.d"
   )

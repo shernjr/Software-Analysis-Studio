@@ -69,10 +69,31 @@ include Assignment-1/CMakeFiles/ass1.dir/progress.make
 # Include the compile flags for this target's objects.
 include Assignment-1/CMakeFiles/ass1.dir/flags.make
 
+<<<<<<< HEAD
 Assignment-1/CMakeFiles/ass1.dir/Assignment-1.cpp.o: Assignment-1/CMakeFiles/ass1.dir/flags.make
 Assignment-1/CMakeFiles/ass1.dir/Assignment-1.cpp.o: Assignment-1/Assignment-1.cpp
 Assignment-1/CMakeFiles/ass1.dir/Assignment-1.cpp.o: Assignment-1/CMakeFiles/ass1.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/SVF-tools/Software-Analysis-Studio/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object Assignment-1/CMakeFiles/ass1.dir/Assignment-1.cpp.o"
+=======
+Assignment-1/CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.o: Assignment-1/CMakeFiles/ass1.dir/flags.make
+Assignment-1/CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.o: Assignment-1/12006300_41128_SaS_Assignment-1.cpp
+Assignment-1/CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.o: Assignment-1/CMakeFiles/ass1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/SVF-tools/Software-Analysis-Studio/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object Assignment-1/CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.o"
+	cd /home/SVF-tools/Software-Analysis-Studio/Assignment-1 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Assignment-1/CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.o -MF CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.o.d -o CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.o -c /home/SVF-tools/Software-Analysis-Studio/Assignment-1/12006300_41128_SaS_Assignment-1.cpp
+
+Assignment-1/CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.i"
+	cd /home/SVF-tools/Software-Analysis-Studio/Assignment-1 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/SVF-tools/Software-Analysis-Studio/Assignment-1/12006300_41128_SaS_Assignment-1.cpp > CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.i
+
+Assignment-1/CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.s"
+	cd /home/SVF-tools/Software-Analysis-Studio/Assignment-1 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/SVF-tools/Software-Analysis-Studio/Assignment-1/12006300_41128_SaS_Assignment-1.cpp -o CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.s
+
+Assignment-1/CMakeFiles/ass1.dir/Assignment-1.cpp.o: Assignment-1/CMakeFiles/ass1.dir/flags.make
+Assignment-1/CMakeFiles/ass1.dir/Assignment-1.cpp.o: Assignment-1/Assignment-1.cpp
+Assignment-1/CMakeFiles/ass1.dir/Assignment-1.cpp.o: Assignment-1/CMakeFiles/ass1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/SVF-tools/Software-Analysis-Studio/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object Assignment-1/CMakeFiles/ass1.dir/Assignment-1.cpp.o"
+>>>>>>> 941537f1578dea4c80f3b223c355a3cced4de612
 	cd /home/SVF-tools/Software-Analysis-Studio/Assignment-1 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Assignment-1/CMakeFiles/ass1.dir/Assignment-1.cpp.o -MF CMakeFiles/ass1.dir/Assignment-1.cpp.o.d -o CMakeFiles/ass1.dir/Assignment-1.cpp.o -c /home/SVF-tools/Software-Analysis-Studio/Assignment-1/Assignment-1.cpp
 
 Assignment-1/CMakeFiles/ass1.dir/Assignment-1.cpp.i: cmake_force
@@ -86,7 +107,11 @@ Assignment-1/CMakeFiles/ass1.dir/Assignment-1.cpp.s: cmake_force
 Assignment-1/CMakeFiles/ass1.dir/test-exes/Test.cpp.o: Assignment-1/CMakeFiles/ass1.dir/flags.make
 Assignment-1/CMakeFiles/ass1.dir/test-exes/Test.cpp.o: Assignment-1/test-exes/Test.cpp
 Assignment-1/CMakeFiles/ass1.dir/test-exes/Test.cpp.o: Assignment-1/CMakeFiles/ass1.dir/compiler_depend.ts
+<<<<<<< HEAD
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/SVF-tools/Software-Analysis-Studio/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object Assignment-1/CMakeFiles/ass1.dir/test-exes/Test.cpp.o"
+=======
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/SVF-tools/Software-Analysis-Studio/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object Assignment-1/CMakeFiles/ass1.dir/test-exes/Test.cpp.o"
+>>>>>>> 941537f1578dea4c80f3b223c355a3cced4de612
 	cd /home/SVF-tools/Software-Analysis-Studio/Assignment-1 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Assignment-1/CMakeFiles/ass1.dir/test-exes/Test.cpp.o -MF CMakeFiles/ass1.dir/test-exes/Test.cpp.o.d -o CMakeFiles/ass1.dir/test-exes/Test.cpp.o -c /home/SVF-tools/Software-Analysis-Studio/Assignment-1/test-exes/Test.cpp
 
 Assignment-1/CMakeFiles/ass1.dir/test-exes/Test.cpp.i: cmake_force
@@ -99,18 +124,30 @@ Assignment-1/CMakeFiles/ass1.dir/test-exes/Test.cpp.s: cmake_force
 
 # Object files for target ass1
 ass1_OBJECTS = \
+<<<<<<< HEAD
+=======
+"CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.o" \
+>>>>>>> 941537f1578dea4c80f3b223c355a3cced4de612
 "CMakeFiles/ass1.dir/Assignment-1.cpp.o" \
 "CMakeFiles/ass1.dir/test-exes/Test.cpp.o"
 
 # External object files for target ass1
 ass1_EXTERNAL_OBJECTS =
 
+<<<<<<< HEAD
+=======
+bin/ass1: Assignment-1/CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.o
+>>>>>>> 941537f1578dea4c80f3b223c355a3cced4de612
 bin/ass1: Assignment-1/CMakeFiles/ass1.dir/Assignment-1.cpp.o
 bin/ass1: Assignment-1/CMakeFiles/ass1.dir/test-exes/Test.cpp.o
 bin/ass1: Assignment-1/CMakeFiles/ass1.dir/build.make
 bin/ass1: /home/SVF-tools/SVF/z3.obj/bin/libz3.so
 bin/ass1: Assignment-1/CMakeFiles/ass1.dir/link.txt
+<<<<<<< HEAD
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/SVF-tools/Software-Analysis-Studio/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable ../bin/ass1"
+=======
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/SVF-tools/Software-Analysis-Studio/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable ../bin/ass1"
+>>>>>>> 941537f1578dea4c80f3b223c355a3cced4de612
 	cd /home/SVF-tools/Software-Analysis-Studio/Assignment-1 && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ass1.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

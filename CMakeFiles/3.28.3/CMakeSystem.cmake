@@ -1,13 +1,25 @@
+<<<<<<< HEAD
 set(CMAKE_HOST_SYSTEM "Linux-6.11.0-1018-azure")
 set(CMAKE_HOST_SYSTEM_NAME "Linux")
 set(CMAKE_HOST_SYSTEM_VERSION "6.11.0-1018-azure")
+=======
+set(CMAKE_HOST_SYSTEM "Linux-6.10.14-linuxkit")
+set(CMAKE_HOST_SYSTEM_NAME "Linux")
+set(CMAKE_HOST_SYSTEM_VERSION "6.10.14-linuxkit")
+>>>>>>> 941537f1578dea4c80f3b223c355a3cced4de612
 set(CMAKE_HOST_SYSTEM_PROCESSOR "x86_64")
 
 
 
+<<<<<<< HEAD
 set(CMAKE_SYSTEM "Linux-6.11.0-1018-azure")
 set(CMAKE_SYSTEM_NAME "Linux")
 set(CMAKE_SYSTEM_VERSION "6.11.0-1018-azure")
+=======
+set(CMAKE_SYSTEM "Linux-6.10.14-linuxkit")
+set(CMAKE_SYSTEM_NAME "Linux")
+set(CMAKE_SYSTEM_VERSION "6.10.14-linuxkit")
+>>>>>>> 941537f1578dea4c80f3b223c355a3cced4de612
 set(CMAKE_SYSTEM_PROCESSOR "x86_64")
 
 set(CMAKE_CROSSCOMPILING "FALSE")

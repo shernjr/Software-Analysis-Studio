@@ -140,6 +140,33 @@ ass1/fast:
 	cd /home/SVF-tools/Software-Analysis-Studio && $(MAKE) $(MAKESILENT) -f Assignment-1/CMakeFiles/ass1.dir/build.make Assignment-1/CMakeFiles/ass1.dir/build
 .PHONY : ass1/fast
 
+<<<<<<< HEAD
+=======
+12006300_41128_SaS_Assignment-1.o: 12006300_41128_SaS_Assignment-1.cpp.o
+.PHONY : 12006300_41128_SaS_Assignment-1.o
+
+# target to build an object file
+12006300_41128_SaS_Assignment-1.cpp.o:
+	cd /home/SVF-tools/Software-Analysis-Studio && $(MAKE) $(MAKESILENT) -f Assignment-1/CMakeFiles/ass1.dir/build.make Assignment-1/CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.o
+.PHONY : 12006300_41128_SaS_Assignment-1.cpp.o
+
+12006300_41128_SaS_Assignment-1.i: 12006300_41128_SaS_Assignment-1.cpp.i
+.PHONY : 12006300_41128_SaS_Assignment-1.i
+
+# target to preprocess a source file
+12006300_41128_SaS_Assignment-1.cpp.i:
+	cd /home/SVF-tools/Software-Analysis-Studio && $(MAKE) $(MAKESILENT) -f Assignment-1/CMakeFiles/ass1.dir/build.make Assignment-1/CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.i
+.PHONY : 12006300_41128_SaS_Assignment-1.cpp.i
+
+12006300_41128_SaS_Assignment-1.s: 12006300_41128_SaS_Assignment-1.cpp.s
+.PHONY : 12006300_41128_SaS_Assignment-1.s
+
+# target to generate assembly for a file
+12006300_41128_SaS_Assignment-1.cpp.s:
+	cd /home/SVF-tools/Software-Analysis-Studio && $(MAKE) $(MAKESILENT) -f Assignment-1/CMakeFiles/ass1.dir/build.make Assignment-1/CMakeFiles/ass1.dir/12006300_41128_SaS_Assignment-1.cpp.s
+.PHONY : 12006300_41128_SaS_Assignment-1.cpp.s
+
+>>>>>>> 941537f1578dea4c80f3b223c355a3cced4de612
 Assignment-1.o: Assignment-1.cpp.o
 .PHONY : Assignment-1.o
 
@@ -198,6 +225,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... ass1"
+<<<<<<< HEAD
+=======
+	@echo "... 12006300_41128_SaS_Assignment-1.o"
+	@echo "... 12006300_41128_SaS_Assignment-1.i"
+	@echo "... 12006300_41128_SaS_Assignment-1.s"
+>>>>>>> 941537f1578dea4c80f3b223c355a3cced4de612
 	@echo "... Assignment-1.o"
 	@echo "... Assignment-1.i"
 	@echo "... Assignment-1.s"

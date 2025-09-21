@@ -2293,3 +2293,6 @@ Assignment-2/Assignment-2.cpp:
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
+
+# Empty compiler generated dependencies file for ass2.
+# This may be replaced when dependencies are built.
