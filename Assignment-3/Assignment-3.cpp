@@ -196,6 +196,31 @@ void AndersenPTA::solveWorklist() {
     }
 }
 
+/**
+ *         NodeID id = popFromWorklist();
+        
+        // Store edges: for each o ∈ pts(id), add copy edge from e.getSrcID() to o
+        for (auto e : cg->getConstraintNode(id)->getStoreInEdges()) {
+            for (auto o : getPts(id)) {
+                addCopyEdge(e->getSrcID(), o);
+            }
+        }
+        
+        // Load edges: for each o ∈ pts(id), add copy edge from o to e.getDstID()
+        for (auto e : cg->getConstraintNode(id)->getStoreOutEdges()) {
+            for (auto o : getPts(id)) {
+                addCopyEdge(o, e->getDstID());
+            }
+        }
+        
+        // Copy edges: propagate points-to sets and add to worklist if changed
+        for (auto e : cg->getConstraintNode(id)->getDirectOutEdges()) {
+            if (unionPts(e->getDstID(), getPts(id))) {
+                pushIntoWorklist(e->getDstID());
+            }
+        }
+ */
+
 /*g = < V,E > !" Constraint Graph
 V: a set of nodes in graph
 E: a set of edges in graph
@@ -225,7 +250,13 @@ while WorkList ≠ ∅ do
 /// snk instruction:  sink(actualParm,...);
 /// return true if actualRet is aliased with any parameter at the snk node (e.g., via ander->alias(..,..))
 bool ICFGTraversal::aliasCheck(const CallICFGNode* src, const CallICFGNode* snk) {
-	
+	const Var* actualRet = src->getReturnVar();
+    if (!actualRet) return false;
+    for (const Var* actualParm : snk->getParamVars()) {
+        if (ander->alias(actualRet, actualParm)) {
+            return true;
+        }
+    }
     
     return false;
 }
