@@ -250,14 +250,17 @@ while WorkList ≠ ∅ do
 /// snk instruction:  sink(actualParm,...);
 /// return true if actualRet is aliased with any parameter at the snk node (e.g., via ander->alias(..,..))
 bool ICFGTraversal::aliasCheck(const CallICFGNode* src, const CallICFGNode* snk) {
-	const Var* actualRet = src->getReturnVar();
-    if (!actualRet) return false;
-    for (const Var* actualParm : snk->getParamVars()) {
-        if (ander->alias(actualRet, actualParm)) {
+	const RetICFGNode* retNode = src->getRetICFGNode();
+    if (!retNode) return false;
+
+    const SVFVar* retVar = retNode->getActualRet();
+    if (!retVar) return false;
+
+    for (const ValVar* actualParm : snk->getActualParms()) {
+        if (ander->alias(retVar, actualParm)) {
             return true;
         }
     }
-    
     return false;
 }
 
