@@ -1,6 +1,7 @@
 {
     "C_Cpp.intelliSenseEngine": "Default",
     "files.associations": {
+        "ostream": "cpp",
         "algorithm": "cpp",
         "cmath": "cpp",
         "array": "cpp",
