@@ -1,10 +1,6 @@
 {
     "C_Cpp.intelliSenseEngine": "Default",
     "files.associations": {
-<<<<<<< HEAD
-=======
-        "ostream": "cpp",
->>>>>>> 941537f1578dea4c80f3b223c355a3cced4de612
         "algorithm": "cpp",
         "cmath": "cpp",
         "array": "cpp",
@@ -61,27 +57,14 @@
         "mutex": "cpp",
         "new": "cpp",
         "numbers": "cpp",
-<<<<<<< HEAD
         "ostream": "cpp",
-=======
-        "queue": "cpp",
-        "ranges": "cpp",
->>>>>>> 941537f1578dea4c80f3b223c355a3cced4de612
         "semaphore": "cpp",
         "shared_mutex": "cpp",
         "span": "cpp",
         "sstream": "cpp",
-<<<<<<< HEAD
         "stdexcept": "cpp",
         "stop_token": "cpp",
         "streambuf": "cpp",
-=======
-        "stack": "cpp",
-        "stdexcept": "cpp",
-        "stop_token": "cpp",
-        "streambuf": "cpp",
-        "text_encoding": "cpp",
->>>>>>> 941537f1578dea4c80f3b223c355a3cced4de612
         "thread": "cpp",
         "cfenv": "cpp",
         "cinttypes": "cpp",
