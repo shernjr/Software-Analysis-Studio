@@ -105,37 +105,35 @@ void ICFGTraversal::reachability(const ICFGNode* src, const ICFGNode* dst) {
 /// line 1 for sources  "{ api1 api2 api3 }"
 /// line 2 for sinks    "{ api1 api2 api3 }"
 void ICFGTraversal::readSrcSnkFromFile(const string& filename) {
-	ifstream file(filename);
+    ifstream file(filename);
     if (!file.is_open()) {
         cerr << "Error opening file: " << filename << endl;
         return;
     }
 
-    string line;
-    // Read sources
-    if (getline(file, line)) {
-        line.erase(remove_if(line.begin(), line.end(), ::isspace), line.end());
-        if (line.front() == '{' && line.back() == '}') {
-            line = line.substr(1, line.size() - 2);
-            stringstream ss(line);
-            string api;
-            while (ss >> api) {
-                checker_source_api.insert(api);
-            }
+    auto parseSetLine = [](const std::string& lineIn, std::set<std::string>& out) {
+        std::string line = lineIn;
+        // find {...}
+        auto l = line.find('{');
+        auto r = line.find('}', l == std::string::npos ? 0 : l + 1);
+        if (l == std::string::npos || r == std::string::npos || r <= l + 1) return;
+        std::string inside = line.substr(l + 1, r - l - 1);
+        std::istringstream iss(inside);
+        std::string tok;
+        while (iss >> tok) {
+            out.insert(tok);
         }
-    }
+    };
 
-    // Read sinks
-    if (getline(file, line)) {
-        line.erase(remove_if(line.begin(), line.end(), ::isspace), line.end());
-        if (line.front() == '{' && line.back() == '}') {
-            line = line.substr(1, line.size() - 2);
-            stringstream ss(line);
-            string api;
-            while (ss >> api) {
-                checker_sink_api.insert(api);
-            }
-        }
+    std::string line;
+
+    // sources
+    if (std::getline(file, line)) {
+        parseSetLine(line, checker_source_api);
+    }
+    // sinks
+    if (std::getline(file, line)) {
+        parseSetLine(line, checker_sink_api);
     }
 
     file.close();
@@ -215,34 +213,22 @@ void AndersenPTA::solveWorklist() {
 
             }
         }
+        
+        for (ConstraintEdge* e : pNode->getStoreInEdges()) {
+            NodeID p = e->getSrcID();
+            const PointsTo& pPts = getPts(p);
+            for (NodeID o : pPts) {
+                if (addCopyEdge(p, o)) {
+                    // propagate now
+                    if (unionPts(o, pPts)) {
+                        pushIntoWorklist(o);
+                    }
+                }
+            }
+        }
 
     }
 }
-
-/**
- *         NodeID id = popFromWorklist();
-        
-        // Store edges: for each o ∈ pts(id), add copy edge from e.getSrcID() to o
-        for (auto e : cg->getConstraintNode(id)->getStoreInEdges()) {
-            for (auto o : getPts(id)) {
-                addCopyEdge(e->getSrcID(), o);
-            }
-        }
-        
-        // Load edges: for each o ∈ pts(id), add copy edge from o to e.getDstID()
-        for (auto e : cg->getConstraintNode(id)->getStoreOutEdges()) {
-            for (auto o : getPts(id)) {
-                addCopyEdge(o, e->getDstID());
-            }
-        }
-        
-        // Copy edges: propagate points-to sets and add to worklist if changed
-        for (auto e : cg->getConstraintNode(id)->getDirectOutEdges()) {
-            if (unionPts(e->getDstID(), getPts(id))) {
-                pushIntoWorklist(e->getDstID());
-            }
-        }
- */
 
 /*g = < V,E > !" Constraint Graph
 V: a set of nodes in graph
@@ -273,14 +259,14 @@ while WorkList ≠ ∅ do
 /// snk instruction:  sink(actualParm,...);
 /// return true if actualRet is aliased with any parameter at the snk node (e.g., via ander->alias(..,..))
 bool ICFGTraversal::aliasCheck(const CallICFGNode* src, const CallICFGNode* snk) {
-	const RetICFGNode* retNode = src->getRetICFGNode();
+    const RetICFGNode* retNode = src->getRetICFGNode();
     if (!retNode) return false;
 
     const SVFVar* retVar = retNode->getActualRet();
     if (!retVar) return false;
 
     for (const ValVar* actualParm : snk->getActualParms()) {
-        if (ander->alias(retVar, actualParm)) {
+        if (ander->alias(retVar->getId(), actualParm->getId())) {
             return true;
         }
     }
