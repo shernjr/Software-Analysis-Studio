@@ -6,8 +6,8 @@
             "type": "cppdbg",
             "request": "launch",
             // Please change to the executable of your current lab or assignment
-            "program": "${workspaceFolder}/bin/ass1",
-            "args": ["/home/SVF-tools/Software-Analysis-Studio/Assignment-1/test-exes/test1.graph.txt"], // may input the test llvm bc file or other options and flags the program may use
+            "program": "${workspaceFolder}/bin/ass4",
+            "args": ["/home/SVF-tools/Software-Analysis-Studio/Assignment-4/Tests/testcases/test1.ll"], // may input the test llvm bc file or other options and flags the program may use
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "C/C++: cpp build active file",
             "MIMode": "gdb",
